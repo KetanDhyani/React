@@ -1,15 +1,9 @@
-import { useState } from 'react'
+import { useState, useMemo, memo } from 'react'
 import { Link } from 'react-router-dom'
 import '../App.css'
 
-function Search() {
-  const [searchQuery, setSearchQuery] = useState('')
-  const [selectedGenre, setSelectedGenre] = useState('All')
-  const [selectedYear, setSelectedYear] = useState('All')
-  const [selectedLanguage, setSelectedLanguage] = useState('All')
-
-  // Sample search data - in a real app this would come from an API
-  const allContent = [
+// Sample search data - in a real app this would come from an API
+const allContent = [
     { id: 1, title: "Hanuman Ansh", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQMBB7tvdT2-FgK-c9IPwW6BiVyhjJyK01oAXkzWTH1Jw&s=10", genre: "Mythology", year: "2024", language: "Hindi", badge: "NEW" },
     { id: 2, title: "Vibe", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS1tDmoZHzlcDu7CiHMBx5g1EtgeD2DRStsICyc59vbjg&s=10", genre: "Drama", year: "2024", language: "Hindi", badge: "NEW" },
     { id: 3, title: "SpiderMan", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSp_-XePk9kJ8jikbpk-LcHon0kltLM6k15qxAMkng7Xg&s=10", genre: "Action", year: "2024", language: "English", badge: "NEW" },
@@ -27,38 +21,46 @@ function Search() {
     { id: 15, title: "Naagin 6", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTF7zlRs9WINB_oqjFx0MetR9H_XbYBjCLVJudLa7HFRg&s=10", genre: "Fantasy", year: "2024", language: "Hindi", badge: "NEW" },
   ]
 
-  const genres = ['All', 'Action', 'Drama', 'Thriller', 'Sci-Fi', 'Reality', 'Mythology', 'Fantasy']
-  const years = ['All', '2024', '2023', '2022', '2021', '2020', '2019', '2018', '2013']
-  const languages = ['All', 'Hindi', 'English', 'Tamil', 'Telugu', 'Malayalam', 'Kannada']
+const genres = ['All', 'Action', 'Drama', 'Thriller', 'Sci-Fi', 'Reality', 'Mythology', 'Fantasy']
+const years = ['All', '2024', '2023', '2022', '2021', '2020', '2019', '2018', '2013']
+const languages = ['All', 'Hindi', 'English', 'Tamil', 'Telugu', 'Malayalam', 'Kannada']
 
-  // Filter content based on search query and filters
-  const filteredContent = allContent.filter(item => {
-    const matchesSearch = searchQuery === '' || 
-      item.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      item.genre.toLowerCase().includes(searchQuery.toLowerCase())
-    
-    const matchesGenre = selectedGenre === 'All' || item.genre === selectedGenre
-    const matchesYear = selectedYear === 'All' || item.year === selectedYear
-    const matchesLanguage = selectedLanguage === 'All' || item.language === selectedLanguage
-
-    return matchesSearch && matchesGenre && matchesYear && matchesLanguage
-  })
-
-  const ContentCard = ({ item }) => (
-    <Link to={`/about?title=${encodeURIComponent(item.title)}`} className="ott-content-card">
-      <div className="ott-card-image-container">
-        <img src={item.image} alt={item.title} className="ott-card-image" />
-        {item.badge && <span className={`ott-badge ${item.badge === 'LIVE' ? 'ott-badge-live' : ''}`}>{item.badge}</span>}
-        <div className="ott-play-overlay">
-          <div className="ott-play-icon">▶</div>
-        </div>
+const ContentCard = memo(({ item }) => (
+  <Link to={`/about?title=${encodeURIComponent(item.title)}`} className="ott-content-card">
+    <div className="ott-card-image-container">
+      <img src={item.image} alt={item.title} className="ott-card-image" />
+      {item.badge && <span className={`ott-badge ${item.badge === 'LIVE' ? 'ott-badge-live' : ''}`}>{item.badge}</span>}
+      <div className="ott-play-overlay">
+        <div className="ott-play-icon">▶</div>
       </div>
-      <div className="ott-card-info">
-        <h3 className="ott-card-title">{item.title}</h3>
-        <p className="ott-card-subtitle">{item.genre} • {item.year} • {item.language}</p>
-      </div>
-    </Link>
-  )
+    </div>
+    <div className="ott-card-info">
+      <h3 className="ott-card-title">{item.title}</h3>
+      <p className="ott-card-subtitle">{item.genre} • {item.year} • {item.language}</p>
+    </div>
+  </Link>
+))
+
+function Search() {
+  const [searchQuery, setSearchQuery] = useState('')
+  const [selectedGenre, setSelectedGenre] = useState('All')
+  const [selectedYear, setSelectedYear] = useState('All')
+  const [selectedLanguage, setSelectedLanguage] = useState('All')
+
+  // Filter content based on search query and filters - memoized to prevent recalculation
+  const filteredContent = useMemo(() => {
+    return allContent.filter(item => {
+      const matchesSearch = searchQuery === '' || 
+        item.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        item.genre.toLowerCase().includes(searchQuery.toLowerCase())
+      
+      const matchesGenre = selectedGenre === 'All' || item.genre === selectedGenre
+      const matchesYear = selectedYear === 'All' || item.year === selectedYear
+      const matchesLanguage = selectedLanguage === 'All' || item.language === selectedLanguage
+
+      return matchesSearch && matchesGenre && matchesYear && matchesLanguage
+    })
+  }, [searchQuery, selectedGenre, selectedYear, selectedLanguage])
 
   return (
     <div className="ott-container">

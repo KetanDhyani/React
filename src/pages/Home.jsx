@@ -1,68 +1,66 @@
-import { useState } from 'react'
 import { Link } from 'react-router-dom'
+import { memo } from 'react'
 import '../App.css'
 
-function Home() {
-  const [count, setCount] = useState(0)
-
-  const contentData = {
+const contentData = {
     newOnOTT: [
-      { title: "Hanuman Ansh", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQMBB7tvdT2-FgK-c9IPwW6BiVyhjJyK01oAXkzWTH1Jw&s=10", badge: "NEW " },
-      { title: "Vibe", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS1tDmoZHzlcDu7CiHMBx5g1EtgeD2DRStsICyc59vbjg&s=10", badge: "NEW" },
-      { title: "SpiderMan", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSp_-XePk9kJ8jikbpk-LcHon0kltLM6k15qxAMkng7Xg&s=10", badge: "NEW" },
-      { title: "Hanuman Ansh", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQMBB7tvdT2-FgK-c9IPwW6BiVyhjJyK01oAXkzWTH1Jw&s=10", badge: "NEW " },
-      { title: "Vibe", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS1tDmoZHzlcDu7CiHMBx5g1EtgeD2DRStsICyc59vbjg&s=10", badge: "NEW" },
-      { title: "SpiderMan", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSp_-XePk9kJ8jikbpk-LcHon0kltLM6k15qxAMkng7Xg&s=10", badge: "NEW" },
+      { id: 'new-1', title: "Hanuman Ansh", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQMBB7tvdT2-FgK-c9IPwW6BiVyhjJyK01oAXkzWTH1Jw&s=10", badge: "NEW " },
+      { id: 'new-2', title: "Vibe", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS1tDmoZHzlcDu7CiHMBx5g1EtgeD2DRStsICyc59vbjg&s=10", badge: "NEW" },
+      { id: 'new-3', title: "SpiderMan", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSp_-XePk9kJ8jikbpk-LcHon0kltLM6k15qxAMkng7Xg&s=10", badge: "NEW" },
+      { id: 'new-4', title: "Hanuman Ansh", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQMBB7tvdT2-FgK-c9IPwW6BiVyhjJyK01oAXkzWTH1Jw&s=10", badge: "NEW " },
+      { id: 'new-5', title: "Vibe", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS1tDmoZHzlcDu7CiHMBx5g1EtgeD2DRStsICyc59vbjg&s=10", badge: "NEW" },
+      { id: 'new-6', title: "SpiderMan", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSp_-XePk9kJ8jikbpk-LcHon0kltLM6k15qxAMkng7Xg&s=10", badge: "NEW" },
     ],
     biggBoss: [
-      { title: "24 HRS Channel", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTNY_KT3iZNATY6dTzNeo5iPfq68AUaD1hoYhLrQcoowQ&s=10", subtitle: "Streaming 24x7" },
-      { title: "Episode 08", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRbIG1QRejuiw63wCb8I-5vkRh3dvK0zCJ_URLRhzHKwg&s=10", badge: "NEW EPISODES FRI", subtitle: "1h 9m" },
-      { title: "Episode 07", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQb1awUUes65z9pyq7OAXXDxMbiIewg3tVv2ddTFyhogw&s=10", badge: "", subtitle: "1h 8m" },
-      { title: "Episode 06", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQxwD8wVak3k3KIxaHVIx61z6kmYPzjX3oy_F2vFt0prQ&s=10", badge: "", subtitle: "1h 12m" },
-      { title: "Episode 05", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRbIG1QRejuiw63wCb8I-5vkRh3dvK0zCJ_URLRhzHKwg&s=10", badge: "", subtitle: "1h 5m" },
-      { title: "Episode 04", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRbIG1QRejuiw63wCb8I-5vkRh3dvK0zCJ_URLRhzHKwg&s=10", badge: "", subtitle: "1h 10m" },
+      { id: 'bb-1', title: "24 HRS Channel", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTNY_KT3iZNATY6dTzNeo5iPfq68AUaD1hoYhLrQcoowQ&s=10", subtitle: "Streaming 24x7" },
+      { id: 'bb-2', title: "Episode 08", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRbIG1QRejuiw63wCb8I-5vkRh3dvK0zCJ_URLRhzHKwg&s=10", badge: "NEW EPISODES FRI", subtitle: "1h 9m" },
+      { id: 'bb-3', title: "Episode 07", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQb1awUUes65z9pyq7OAXXDxMbiIewg3tVv2ddTFyhogw&s=10", badge: "", subtitle: "1h 8m" },
+      { id: 'bb-4', title: "Episode 06", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQxwD8wVak3k3KIxaHVIx61z6kmYPzjX3oy_F2vFt0prQ&s=10", badge: "", subtitle: "1h 12m" },
+      { id: 'bb-5', title: "Episode 05", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRbIG1QRejuiw63wCb8I-5vkRh3dvK0zCJ_URLRhzHKwg&s=10", badge: "", subtitle: "1h 5m" },
+      { id: 'bb-6', title: "Episode 04", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRbIG1QRejuiw63wCb8I-5vkRh3dvK0zCJ_URLRhzHKwg&s=10", badge: "", subtitle: "1h 10m" },
     ],
     top10Hindi: [
-      { title: "Khatron Ke Khiladi", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTF7zlRs9WINB_oqjFx0MetR9H_XbYBjCLVJudLa7HFRg&s=10", badge: "NEW" },
-      { title: "Anupamaa", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ_Th-BKs4ztLYV9iZMbowFB92KhUloNSAw81GAU3PFxw&s=10", badge: "NEW EPISODE DAILY" },
-      { title: "Yeh Rishta Kya Kehlata Hai", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTHOyhDE9jUirzJjQd9eWgd8SFjIQFWJjE0GC6ZWDrT1A&s=10", badge: "NEW EPISODE DAILY" },
-      { title: "Ghum Hai Kisikey Pyaar Meiin", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTgzHgcWZziB7KUn2p1rDWI8xgf7VU1dZ3gPnqne1Dfeg&s=10", badge: "NEW EPISODE DAILY" },
-      { title: "Kundali Bhagya", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTF7zlRs9WINB_oqjFx0MetR9H_XbYBjCLVJudLa7HFRg&s=10", badge: "NEW EPISODE DAILY" },
-      { title: "Naagin 6", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTF7zlRs9WINB_oqjFx0MetR9H_XbYBjCLVJudLa7HFRg&s=10", badge: "NEW" },
+      { id: 'hindi-1', title: "Khatron Ke Khiladi", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTF7zlRs9WINB_oqjFx0MetR9H_XbYBjCLVJudLa7HFRg&s=10", badge: "NEW" },
+      { id: 'hindi-2', title: "Anupamaa", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ_Th-BKs4ztLYV9iZMbowFB92KhUloNSAw81GAU3PFxw&s=10", badge: "NEW EPISODE DAILY" },
+      { id: 'hindi-3', title: "Yeh Rishta Kya Kehlata Hai", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTHOyhDE9jUirzJjQd9eWgd8SFjIQFWJjE0GC6ZWDrT1A&s=10", badge: "NEW EPISODE DAILY" },
+      { id: 'hindi-4', title: "Ghum Hai Kisikey Pyaar Meiin", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTgzHgcWZziB7KUn2p1rDWI8xgf7VU1dZ3gPnqne1Dfeg&s=10", badge: "NEW EPISODE DAILY" },
+      { id: 'hindi-5', title: "Kundali Bhagya", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTF7zlRs9WINB_oqjFx0MetR9H_XbYBjCLVJudLa7HFRg&s=10", badge: "NEW EPISODE DAILY" },
+      { id: 'hindi-6', title: "Naagin 6", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTF7zlRs9WINB_oqjFx0MetR9H_XbYBjCLVJudLa7HFRg&s=10", badge: "NEW" },
     ]
   }
 
-  const ContentCard = ({ item }) => (
-    <div className="ott-content-card">
-      <Link to={`/about?title=${encodeURIComponent(item.title)}`} className="ott-archive-button">
-         <div className="ott-card-image-container">
-        <img src={item.image} alt={item.title} className="ott-card-image" />
-        {item.badge && <span className={`ott-badge ${item.badge === 'LIVE' ? 'ott-badge-live' : ''}`}>{item.badge}</span>}
-        <div className="ott-play-overlay">
-          <div className="ott-play-icon">▶</div>
-        </div>
+const ContentCard = memo(({ item }) => (
+  <div className="ott-content-card">
+    <Link to={`/about?title=${encodeURIComponent(item.title)}`} className="ott-archive-button">
+       <div className="ott-card-image-container">
+      <img src={item.image} alt={item.title} className="ott-card-image" />
+      {item.badge && <span className={`ott-badge ${item.badge === 'LIVE' ? 'ott-badge-live' : ''}`}>{item.badge}</span>}
+      <div className="ott-play-overlay">
+        <div className="ott-play-icon">▶</div>
       </div>
-        </Link>
+    </div>
+      </Link>
+    
+    <div className="ott-card-info">
+      <h3 className="ott-card-title">{item.title}</h3>
+      {item.subtitle && <p className="ott-card-subtitle">{item.subtitle}</p>}
       
-      <div className="ott-card-info">
-        <h3 className="ott-card-title">{item.title}</h3>
-        {item.subtitle && <p className="ott-card-subtitle">{item.subtitle}</p>}
-        
-      </div>
     </div>
-  )
+  </div>
+))
 
-  const ContentRail = ({ title, items }) => (
-    <div className="ott-content-rail">
-      <h2 className="ott-rail-title">{title}</h2>
-      <div className="ott-rail-container">
-        {items.map((item, index) => (
-          <ContentCard key={index} item={item} />
-        ))}
-      </div>
+const ContentRail = memo(({ title, items }) => (
+  <div className="ott-content-rail">
+    <h2 className="ott-rail-title">{title}</h2>
+    <div className="ott-rail-container">
+      {items.map((item) => (
+        <ContentCard key={item.id} item={item} />
+      ))}
     </div>
-  )
+  </div>
+))
 
+function Home() {
   return (
     <div className="ott-container">
       <div className="ott-sidebar">
