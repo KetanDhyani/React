@@ -1,0 +1,20 @@
+{
+  "id": "com.yourcompany.reactdemo",
+  "version": "1.0.0",
+  "vendor": "Your Company",
+  "type": "web",
+  "main": "index.html",
+  "title": "ReactDemo",
+  "icon": "icon.png",
+  "largeIcon": "largeIcon.png",
+  "appDescription": "React Demo Application for webOS",
+  "keywords": ["React", "Demo", "webOS"],
+  "iconColor": "#61dafb",
+  "splashBackground": "#242424",
+  "uiRevision": ["2"],
+  "allowVideoCapture": false,
+  "allowAudioCapture": false,
+  "allowBrowserNetworkAccess": true,
+  "requiredPermissions": ["time.launch.parameters"],
+  "trustLevel": "normal"
+}

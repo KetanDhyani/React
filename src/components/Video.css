@@ -1,0 +1,16 @@
+.video-container {
+  margin: 2rem 0;
+  text-align: center;
+}
+
+.video-title {
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+.video-player {
+  width: 100%;
+  max-width: 800px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}

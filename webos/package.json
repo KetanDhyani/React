@@ -1,0 +1,13 @@
+{
+  "name": "reactdemo-webos",
+  "version": "1.0.0",
+  "description": "React Demo for webOS",
+  "scripts": {
+    "build": "ares-package .",
+    "install": "ares-install --device localhost com.yourcompany.reactdemo_1.0.0_all.ipk",
+    "launch": "ares-launch --device localhost com.yourcompany.reactdemo"
+  },
+  "dependencies": {
+    "@webosose/ares-cli": "^2.1.0"
+  }
+}

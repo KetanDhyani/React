@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<widget xmlns="http://www.w3.org/ns/widgets" xmlns:tizen="http://tizen.org/ns/widgets" id="http://yourcompany.com/reactdemo" version="1.0.0" viewmodes="maximized">
+  <tizen:application id="com.yourcompany.reactdemo" package="com.yourcompany.reactdemo" required_version="4.0"/>
+  <content src="index.html"/>
+  <name>ReactDemo</name>
+  <description>React Demo Application for Tizen</description>
+  <tizen:category name="application"/>
+  <tizen:profile name="tv"/>
+  <icon src="icon.png"/>
+  <tizen:setting screen-orientation="landscape" context-menu="enable" background-support="disable" encryption="disable" hwkey-event="enable"/>
+  <access origin="*" subdomains="true"/>
+  <tizen:privilege name="http://tizen.org/privilege/internet"/>
+  <tizen:privilege name="http://tizen.org/privilege/network.get"/>
+</widget>
