@@ -4,6 +4,7 @@ import Home from './pages/Home'
 import About from './pages/About'
 import Features from './pages/Features'
 import Contact from './pages/Contact'
+import Search from './pages/Search'
 import './App.css'
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
         <Route path="/about" element={<About />} />
         <Route path="/features" element={<Features />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/search" element={<Search />} />
       </Routes>
     </>
   )

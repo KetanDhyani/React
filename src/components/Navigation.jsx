@@ -16,9 +16,6 @@ function Navigation() {
             <Link to="/about">Archive</Link>
           </li>
           <li>
-            <Link to="/features">Features</Link>
-          </li>
-          <li>
             <Link to="/contact">Contact</Link>
           </li>
         </ul>
